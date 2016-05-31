@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+    <head>
+        <% include head %>
+    </head>
+    <body>
+        <%include naviguide.ejs %>
+        <div class='container' style='margin-right:0px'>
+                <div class='row'>
+                    <form role='form'>
+                        <div class='col-md-4 col-sm-6'>
+                            <label>输入出发地点：</label>
+                            <input type="text" class='form-control'/>
+                        </div>
+                        <div class='col-md-4 col-sm-6'>
+                            <label>输入目的地：</label>
+                            <input type="text" class='form-control'/>
+                        </div>
+                        <div class='col-md-4 col-sm-6'>
+                            <label>输入筛选时间：</label>
+                            <input type="text" class='form-control'/>
+                        </div>
+                        <br>
+                        <div class='col-md-12 text-center'><button type='submit' class='btn btn-primary'>提交</div>
+                    </form>
+                </div>
+                <br>
+              <div class='panel panel-default' style="color:gray;">
+                <div class='panel-heading'><h3 class='panel-title'>拼车广场</h3></div>
+                <div class='panel-body'>
+            <ul class='list-group'>
+                <% for (var i=0;i<carpools.length;i++){%>
+                    <a href=<%- '"pooldetail?Carpool='+carpools[i].PoolID+'"' %> class='list-group-item'>
+                        <div class='row'>
+                            <div class='col-md-1 list-group-item-text'>从</div>
+                            <div class='col-md-3 list-group-item-text'>
+                                <h3><%- carpools[i].Departure %></h3>
+                            </div>
+                            <div class='col-md-1 list-group-item-text'>至</div>
+                            <div class='col-md-3 list-group-item-text'>
+                                <h3><%- carpools[i].Destination %></h3>
+                            </div>
+                            <div class='col-md-2' style="font-size:20px list-group-item-text"><%- carpools[i].D_date %></div>
+                            <div class='col-md-2' style="font-size:20px list-group-item-text"><%- carpools[i].Capacity %>人</div>
+                        </div>
+                    </a>
+                <%}%>
+            </ul>
+          </div>
+          </div>
+        </div>
+        <%include footer.html %>
+    </body>
+    <%include foot.html %>
+</html>

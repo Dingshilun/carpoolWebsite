@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+    <head>
+        <% include head %>
+    </head>
+    <body>
+        <% include naviguide %>
+        <div class='container'>
+        <div class='row'>
+            <div class='panel panel-primary'>
+                <div class='panel-headding'>
+                    <%-UserID%>
+                    的资料
+                </div>
+                <form role='form' action='./editprofile' method='post' enctype='multipart/form-data'>
+                    <div class='panel-body'>
+                        <div class='row form-group'>
+                            <label class='form'>性别</label>
+                            <div class="radio" style='padding-left:25px'>
+                                <input class='form-group-control' type="radio" name="gender" id="optionsRadios1" value="male" <%if (user[0].Gender=='m'){ %> checked<%}%> > 男
+                        </div>
+                        <div class="radio" style='padding-left:25px'>
+                            <input class='form-group-control'  type="radio" name="gender" id="optionsRadios2" value="female" <% if (user[0].Gender=='f'){ %> checked <%}%> > 女
+                        </div>
+                    </div>
+                    <div class='row form-group'>
+                        <label for="name">详细信息</label>
+                        <textarea class="form-control" rows="3" name='detail' value=<%-"'"+user[0].Introduction+"'"%>><%-user[0].Introduction%></textarea>
+                    </div>
+                    <div class="row" style="height: 100px">
+                       头像上传：
+                        <input id="file-Portrait1" type="file" multiple="multiple">
+                    </div>
+                    <div class='row text-center'>
+                    <button type='submit' class='btn btn-primary'>确认修改</button></div>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+    <% include footer.html %>
+</body>
+<%include foot.html %>
+<script type='text/javascript'>
+function initFileInput(ctrlName, uploadUrl) {
+    var control = $('#' + ctrlName);
+
+    control.fileinput({
+        language: 'zh', //设置语言
+        uploadUrl: uploadUrl, //上传的地址
+        allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀
+        showUpload: false, //是否显示上传按钮
+        showCaption: false,//是否显示标题
+        browseClass: "btn btn-primary", //按钮样式
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+    });
+}
+initFileInput(file-Portrait1,'./uplod')
+</script>
+</html>

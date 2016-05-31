@@ -1,0 +1,43 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">发起拼车</h4>
+            </div>
+            <form class='form-group' method='post' action='BeginCarpool'>
+                <div class="modal-body">
+
+                    <div class='form-group'>
+                        <label for='Departure'>出发地</label>
+                        <input type='text' name='Departure' class='form-control'/>
+                    </div>
+                    <div class='form-group'>
+                        <label for='Destination'>目的地</label>
+                        <input type='text' name='Destination' class='form-control'/>
+                    </div>
+                    <div class='form-group'>
+                        <label for='date'>日期</label>
+                        <input type='text' name='D_date' class='form-control'/>
+                    </div>
+                    <div class='form-group'>
+                        <label for='Capacity'>最大人数</label>
+                        <input type='text' name='Capacity' class='form-control'/>
+                    </div>
+                    <div class='form-group'>
+                        <label for='contact'>联系方式</label>
+                        <input type='text' name='contact' class='form-control'/>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">发起拼车</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

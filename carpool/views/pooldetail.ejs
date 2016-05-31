@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+    <head>
+        <% include head %>
+    </head>
+    <body>
+      <% include naviguide %>
+      <div class='container'>
+        <div class='row'>
+        <div class='panel panel-primary' style='border-color:gray'>
+        <div class='row'>
+            <div class='col-md-1 list-group-item-text'>从</div>
+            <div class='col-md-3 list-group-item-text'>
+                <h3><%- carpools[0].Departure %></h3>
+            </div>
+            <div class='col-md-1 list-group-item-text'>至</div>
+            <div class='col-md-3 list-group-item-text'>
+                <h3><%- carpools[0].Destination %></h3>
+            </div>
+            <div class='col-md-2' style="font-size:20px list-group-item-text"><%- carpools[0].D_date %></div>
+            <div class='col-md-2' style="font-size:20px list-group-item-text"><%- carpools[0].Capacity %>人</div>
+        </div>
+      </div>
+    </div>
+        <div class='row'>
+        <%if (typeof users!='undefined'){%>
+          <div class='panel panel-primary' style='border-color:gray'>
+            <div class='panel panel-head'><h3>参与人员</h3></div>
+            <ul>
+          <% for (var i=0;i<users.length;i+=2){%>
+            <div class='row'>
+              <% if (i+1==users.length){%>
+                <div class='rol-md-6 rol-sm-12'>
+                  <%- users[i].UserID %>
+                </div>
+                <%}else{%>
+                  <div class='rol-md-6 rol-sm-12'>
+                    <%- users[i].UserID %>
+                  </div><div class='rol-md-6 rol-sm-12'>
+                    <%- users[i+1].UserID %>
+                  </div>
+                  <%}%>
+            </div>
+          <%}%>
+          </ul>
+          </div>
+        <%}%>
+        <div class='row text-center'>
+          <a type='button' class='btn btn-primary' href=<%- "'"+'./joinCarpool?PoolID='+carpools[0].PoolID+"'"%> >确认参加</a>
+        </div>
+      </div>
+        <%include footer.html %>
+      </div>
+    </body>
+    <%include foot.html %>
+</html>
