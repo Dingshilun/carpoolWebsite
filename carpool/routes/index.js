@@ -5,7 +5,7 @@ var session = require('express-session')
 var mysql=require('./mysqlconnect')
 var logmanager=require('./login')
 var carpoolmanager=require('./carpoolmanager')
-
+var sock=require('./contactor')
 var multiparty = require('multiparty');
 var util = require('util');
 var fs = require('fs');
@@ -70,6 +70,7 @@ router.get('/login', function(req, res, next) {
 });
 router.get('/test',function(req,res,next){
   console.log('get test');
+  sock.init()
   var carpools=[{PoolID:1,Departure:'Departure',Destination:'Destination',D_date:'2016-02-03 9:00',Capacity:5}]
   res.render("editprofile",{
     carpools:carpools,
@@ -154,11 +155,16 @@ router.post('/editprofile',function(req,res,next){
 
 })
 })
-
+/********退出*********/
+router.get('/exit',function(req,res,next){
+  req.session.user.delete
+  res.redirect('/login')
+})
 /******加入聊天*****/
 router.get('/contact',function(req,res,next){
   res.render('contact',{
     UserID:req.session.user
   })
 })
+
 module.exports = router;

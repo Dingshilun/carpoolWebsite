@@ -39,16 +39,23 @@ create table friends(
   foreign key(UserID2) references users(UserID)
 )DEFAULT CHARSET=utf8;
 
-create table contact_content(
+create table contact(
   GroupID int primary key auto_increment,
+  description text
+)DEFAULT CHARSET=utf8;
+
+create table contact_content(
+  GroupID int,
   Sender varchar(20),
   foreign key(Sender) references users(UserID),
-  Content text
+  foreign key(GroupID) references contact(GroupID),
+  Content text,
+  Send_date datetime
 )DEFAULT CHARSET=utf8;
 
 create table join_contact(
   GroupID int,
   UserID varchar(20),
-  foreign key(GroupID) references contact_content(GroupID),
+  foreign key(GroupID) references contact(GroupID),
   foreign key(UserID) references users(UserID)
 )DEFAULT CHARSET=utf8;

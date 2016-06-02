@@ -1,6 +1,6 @@
 var mysql=require('./mysqlconnect')
 var tool=require('./utility')
-exports.addfriend(UserID1,UserID2,callback)
+exports.addfriend=function(UserID1,UserID2,callback)
 {
   var sql='insert into friends values('+tool.bag(UserID1)+','+tool.bag(UserID2)+');'
   mysql.query(sql,function(qerr,vals,fields){
@@ -10,7 +10,7 @@ exports.addfriend(UserID1,UserID2,callback)
   })
 }
 
-exports.deletefriend(UserID1,UserID2,callback){
+exports.deletefriend=function(UserID1,UserID2,callback){
   var sql='delete from friends where UserID1='+tool.bag(UserID1)+' and UserID2='+tool.bag(UserID2)+';'
   mysql.query(sql,function(qerr,vals,fields){
     if (!qerr){
@@ -19,7 +19,7 @@ exports.deletefriend(UserID1,UserID2,callback){
   })
 }
 //callback(vals,success)
-exports.showAllfriends(UserID,callback)
+exports.showAllfriends=function(UserID,callback)
 {
   var sql='select * from friends where UserID1='+tool.bag(UserID)+';'
   mysql.query(sql,function(qerr,vals,fields){

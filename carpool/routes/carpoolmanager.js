@@ -1,6 +1,6 @@
 var mysql=require('./mysqlconnect')
 var tool=require('./utility')
-
+var contactmanager=require('./contactmanager')
 exports.UsersInCarpool=function(PoolID,callback){
   var sql='select users.UserID,Pics from joinpool natural join users left join userPic on users.UserID=userPic.UserID where PoolID='+tool.bag(PoolID)+';'
   mysql.query(sql,callback)
@@ -68,7 +68,7 @@ exports.JoinCarpool=function(PoolID,UserID,callback){
     if (qerr)
     {
     }else {
-      if(callback)callback('success');
+      contactmanager.join_contact(UserID,PoolID,callback)
     }
   })
 }
@@ -93,7 +93,8 @@ exports.BeginCarpool=function(userID,Departure,Destination,D_date,Capacity,conta
     } else{
       mysql.query('select @@IDENTITY',function(qerr,vals,fields){
         console.log(vals[0]['@@IDENTITY']);
-        exports.JoinCarpool(vals[0]['@@IDENTITY'],userID,callback('success'));
+        contactmanager.begin_contact(vals[0]['@@IDENTITY'],'',exports.JoinCarpool(vals[0]['@@IDENTITY'],userID,callback('success')))
+
       })
 
     }

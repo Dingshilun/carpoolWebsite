@@ -4,13 +4,14 @@
 
         <link href='css/contact.css' rel='stylesheet'>
         <% include head %>
+
     </head>
     <body>
         <%include naviguide %>
         <div class='container'>
             <div class='row'>
 
-                <div class='col-md-3 col-sm-6'>
+                <div class='col-md-2 col-sm-6'>
                   <div  data-spy="affix">
                     <div class='panel panel-primary' style="width:100%;boader-color:gray" id="panel-left">
                         <a href="#" class="list-group-item">
@@ -28,118 +29,14 @@
                     </div>
                 </div>
               </div>
-                <div class='col-md-8 col-sm-6'>
-                            <div class='panel panel-primary' style='background-color:#f3f3f3' overflow='scroll'>
-                            <ul class="content-reply-box mg10">
-                                <li class="odd">
-                                    <a class="user" href="#"><img class="img-responsive avatar_" src="images/avatar-1.png" alt="">
-                                        <span class="user-name">奔波儿灞</span>
-                                    </a>
-                                    <div class="reply-content-box">
-                                        <span class="reply-time">03-08 15：00</span>
-                                        <div class="reply-content pr">
-                                            <span class="arrow">&nbsp;</span>
-                                            为什么小鑫的名字里有三个金呢？
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="even">
-                                    <a class="user" href="#"><img class="img-responsive avatar_" src="images/avatar-1.png" alt="">
-                                        <span class="user-name">灞波儿奔</span>
-                                    </a>
-                                    <div class="reply-content-box">
-                                        <span class="reply-time">03-08 15：10</span>
-                                        <div class="reply-content pr">
-                                            <span class="arrow">&nbsp;</span>
-                                            他命里缺金，所以取名叫鑫，有些人命里缺水，就取名叫淼，还有些人命里缺木就叫森。
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="odd">
-                                    <a class="user" href="#"><img class="img-responsive avatar_" src="images/avatar-1.png" alt="">
-                                        <span class="user-name">奔波儿灞</span>
-                                    </a>
-                                    <div class="reply-content-box">
-                                        <span class="reply-time">03-08 15：20</span>
-                                        <div class="reply-content pr">
-                                            <span class="arrow">&nbsp;</span>
-                                            那郭晶晶命里缺什么？
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="even">
-                                    <a class="user" href="#"><img class="img-responsive avatar_" src="images/avatar-1.png" alt="">
-                                        <span class="user-name">灞波儿奔</span>
-                                    </a>
-                                    <div class="reply-content-box">
-                                        <span class="reply-time">03-08 15：30</span>
-                                        <div class="reply-content pr">
-                                            <span class="arrow">&nbsp;</span>
-                                            此处省略一百字...
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="even">
-                                    <a class="user" href="#"><img class="img-responsive avatar_" src="images/avatar-1.png" alt="">
-                                        <span class="user-name">灞波儿奔</span>
-                                    </a>
-                                    <div class="reply-content-box">
-                                        <span class="reply-time">03-08 15：30</span>
-                                        <div class="reply-content pr">
-                                            <span class="arrow">&nbsp;</span>
-                                            此处省略一百字...
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="even">
-                                    <a class="user" href="#"><img class="img-responsive avatar_" src="images/avatar-1.png" alt="">
-                                        <span class="user-name">灞波儿奔</span>
-                                    </a>
-                                    <div class="reply-content-box">
-                                        <span class="reply-time">03-08 15：30</span>
-                                        <div class="reply-content pr">
-                                            <span class="arrow">&nbsp;</span>
-                                            此处省略一百字...
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="even">
-                                    <a class="user" href="#"><img class="img-responsive avatar_" src="images/avatar-1.png" alt="">
-                                        <span class="user-name">灞波儿奔</span>
-                                    </a>
-                                    <div class="reply-content-box">
-                                        <span class="reply-time">03-08 15：30</span>
-                                        <div class="reply-content pr">
-                                            <span class="arrow">&nbsp;</span>
-                                            此处省略一百字...
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="even">
-                                    <a class="user" href="#"><img class="img-responsive avatar_" src="images/avatar-1.png" alt="">
-                                        <span class="user-name">灞波儿奔</span>
-                                    </a>
-                                    <div class="reply-content-box">
-                                        <span class="reply-time">03-08 15：30</span>
-                                        <div class="reply-content pr">
-                                            <span class="arrow">&nbsp;</span>
-                                            此处省略一百字...
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul class="operating row text-center linear-g">
-                                <li class="col-xs-4">
-                                    <a href="#">
-                                        <span class="glyphicon glyphicon-tags"></span>
-                                        &nbsp;标签</a>
-                                </li>
-                                <li class="col-xs-4">
-                                    <a href="#">
-                                        <span class="glyphicon glyphicon-comment"></span>
-                                        &nbsp;回复</a>
-                                </li>
+                <div class='col-md-10 col-sm-6'>
+                            <div class='panel panel-primary' style='background-color:#f3f3f3' overflow='scroll' height='100px'>
+                            <ul class="content-reply-box mg10" style='height:450px' id='content' overflow='scroll'>
 
+                            </ul>
+                            <ul class="panel panel-footer">
+                              <div class='row'><div class='col-md-10 col-sm-10'><input type='text' class='form-control' id='input_message'/></div>
+                              <div class='col-md-2 col-sm-2'><button onclick="sendmessage()" class='btn btn-primary btn-block'>发送</button></div></div>
                             </ul>
                         </div>
                     </div>
@@ -148,5 +45,16 @@
         </div>
         <%include footer.html %>
     </body>
+    <script src='/socket.io/socket.io.js'></script>
+    <script src='js/contactor_client.js'></script>
+    <script type='text/javascript'>
+    window.onload = function() {
+        Zhepin.init();
+
+    };
+    function sendmessage(){
+      console.log('sendmessage');
+    }
+    </script>
     <%include foot.html %>
 </html>
