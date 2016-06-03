@@ -11,31 +11,43 @@ exports.init=function(){
 
   mysql.query(sql,function(qerr,vals,fields){
     for (GroupID in vals){
-      var sql='select GroupID,UserID from join_contact where GroupID='+tool.bag(vals[GroupID].GroupID)+';'
-      mysql.query(sql,function(qerr,vals2,fields){
-        if (vals2)join_contact.push(vals2[0].GroupID,vals2)
-      })
+    join_contact[vals[GroupID].GroupID]=new Array()
     }
   })
 }
 exports.oncallback=function(socket){
   console.log('new connection=======================');
+  console.log(join_contact);
   socket.on('userinfo',function(info){
-    socket[info['user']]=socket
+    console.log('==============User:',info);
+    info=JSON.parse(info)
+    socketMap[info[0].UserID]=socket
+    var sql='select GroupID from join_contact where UserID='+tool.bag(info[0].UserID)+';'
+    mysql.query(sql,function(qerr,vals,fields){
+      for (i in vals){
+        join_contact[vals[i].GroupID].push(info[0].UserID)
+      }
+    })
+    //console.log(socketMap);
   })//传递用户过来
   socket.on('message',function(message){
     console.log(message);
-    var GroupID=message['GroupID']
-    var content=message['Content']
-    var User=message['user']
+    message=JSON.parse(message)
+    var GroupID=message[0].GroupID
+    var content=message[0].Content
+    var User=message[0].UserID
     var Send_date=new Date()
-    message['Send_date']=Send_date
+    message[0].Send_date=Send_date
+    console.log(">>>>>>>>>>>>>>>join_contact>>>>>>>>",join_contact);
     var sql='insert into contact_content values('+tool.bag(GroupID)+','+tool.bag(User)+','+tool.bag(content)+','+tool.bag(Send_date)+');'
     mysql.query(sql,function(qerr,vals,fields){
-      var send_back_message=[{GroupID:GroupID,Content:content,User:User,Send_date:Send_date}]
       for (i in join_contact[GroupID]){
-        var user=join_contact[GroupID][i].UserID
-        if (socketMap[user]) socketMap[user].emit('message_from_server',send_back_message)
+        console.log(i);
+        var user=join_contact[GroupID][i]
+        console.log('===========send message?',user);
+        if (socketMap[user]) {
+          console.log('send message to',user,message[0].content);
+          socketMap[user].emit('message_from_server',JSON.stringify(message))}
       }//广播信息
     })
   })//发消息，发到聊天group，两个人可以建一个只有两个人的group
@@ -45,7 +57,7 @@ exports.oncallback=function(socket){
     var User=message['User']
     var sql='select * from contact_content where GroupID='+tool.bag(GroupID)+' order by Send_date limit 20;'
     mysql.query(sql,function(qerr,vals,fields){
-      socketMap[User].emit('message_from_server',vals)
+      socketMap[User].emit('message_from_server',JSON.stringify(vals))
     })
   })
   //用户退出

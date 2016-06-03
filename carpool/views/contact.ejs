@@ -4,7 +4,7 @@
 
         <link href='css/contact.css' rel='stylesheet'>
         <% include head %>
-
+        <div visible='hidden' id='GroupID_'>4</div>
     </head>
     <body>
         <%include naviguide %>
@@ -12,49 +12,58 @@
             <div class='row'>
 
                 <div class='col-md-2 col-sm-6'>
-                  <div  data-spy="affix">
-                    <div class='panel panel-primary' style="width:100%;boader-color:gray" id="panel-left">
-                        <a href="#" class="list-group-item">
-                            <span class="glyphicon glyphicon-home"></span>
-                            &nbsp;菜单1</a>
-                        <a href="#" class="list-group-item">
-                            <span class="glyphicon glyphicon-edit"></span>
-                            &nbsp;菜单2</a>
-                        <a href="#" class="list-group-item">
-                            <span class="glyphicon glyphicon-list"></span>
-                            &nbsp;菜单3</a>
-                        <a href="#" class="list-group-item">
-                            <span class="glyphicon glyphicon-list-alt"></span>
-                            &nbsp;菜单4</a>
+                    <div data-spy="affix">
+                        <div class='panel panel-primary' style="width:100%;boader-color:gray" id="panel-left">
+                            <a href="#" class="list-group-item">
+                                <span class="glyphicon glyphicon-home"></span>
+                                &nbsp;菜单1</a>
+                            <a href="#" class="list-group-item">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                &nbsp;菜单2</a>
+                            <a href="#" class="list-group-item">
+                                <span class="glyphicon glyphicon-list"></span>
+                                &nbsp;菜单3</a>
+                            <a href="#" class="list-group-item">
+                                <span class="glyphicon glyphicon-list-alt"></span>
+                                &nbsp;菜单4</a>
+                        </div>
                     </div>
                 </div>
-              </div>
                 <div class='col-md-10 col-sm-6'>
-                            <div class='panel panel-primary' style='background-color:#f3f3f3' overflow='scroll' height='100px'>
-                            <ul class="content-reply-box mg10" style='height:450px' id='content' overflow='scroll'>
-
-                            </ul>
-                            <ul class="panel panel-footer">
-                              <div class='row'><div class='col-md-10 col-sm-10'><input type='text' class='form-control' id='input_message'/></div>
-                              <div class='col-md-2 col-sm-2'><button onclick="sendmessage()" class='btn btn-primary btn-block'>发送</button></div></div>
-                            </ul>
-                        </div>
+                    <div class='panel panel-primary' style='background-color:#f3f3f3' overflow='scroll' height='100px'>
+                        <ul class="content-reply-box mg10" style='height:450px;overflow:scroll' id='content'></ul>
+                        <ul class="panel panel-footer">
+                            <div class='row'>
+                                <div class='col-md-10 col-sm-10'><input type='text' class='form-control' id='input_message'/></div>
+                                <div class='col-md-2 col-sm-2'>
+                                    <button onclick="sendmessage()" class='btn btn-primary btn-block'>发送</button>
+                                </div>
+                            </div>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <%include footer.html %>
-    </body>
-    <script src='/socket.io/socket.io.js'></script>
-    <script src='js/contactor_client.js'></script>
-    <script type='text/javascript'>
+    </div>
+    <%include footer.html %>
+</body>
+<script src='/socket.io/socket.io.js'></script>
+<script src='js/contactor_client.js'></script>
+<%include foot.html %>
+<script type='text/javascript'>
     window.onload = function() {
         Zhepin.init();
-
+        Zhepin.sendUser()
     };
-    function sendmessage(){
-      console.log('sendmessage');
+    function sendmessage() {
+        Zhepin.sendMessage()
     }
-    </script>
-    <%include foot.html %>
+    $(document).ready(function() {
+        $("#input_message").keyup(function() {
+            if (event.keyCode == 13) {
+                sendmessage()
+            }
+        });
+    })
+</script>
 </html>

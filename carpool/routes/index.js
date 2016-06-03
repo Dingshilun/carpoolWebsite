@@ -44,6 +44,10 @@ router.post('/login',function(req,res,next){
       res.redirect('/palace')
     }else {
       console.log('登录失败');
+      res.render('login',{
+        content:'请重新登录',
+        feedback:(feedback=='PasswordError')?'密码错误，请确认':'用户名不存在'
+      })
     }
   })
 })
@@ -53,10 +57,10 @@ router.post('/registe',function(req,res,next){
   logmanager.registe(req.body.userid,req.body.password,req.body.gender,req.body.detail,function(feedback){
     if (feedback=='UserExists'){
       console.log('用户名重复');
-      res.render('login',{content:'用户名重复'})
+      res.render('login',{content:'请重新注册',feedback:'用户名已存在'})
     }else {
       console.log('注册成功');
-      res.render('login',{content:'注册成功'})
+      res.render('login',{content:'低碳，环保',feedback:'您可以使用'+req.body.userid+'登陆了'})
     }
   })
 })
