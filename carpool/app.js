@@ -8,6 +8,7 @@ var io=require('socket.io')
 var session = require('express-session')
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var contact_routers=require('./routes/contact_routers')
 var app = express();
 // view engine setup
 
@@ -32,7 +33,7 @@ app.use(session(
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req,res,next){
-  console.log(req.session);
+  //console.log(req.session);
   if (typeof req.session.user=='undefined'){
     console.log('app filter');
     if(req.url=='/login'||req.url=='/test')
@@ -47,6 +48,7 @@ app.use(function(req,res,next){
     next();
   }
 })
+app.use('/contact',contact_routers)
 app.use('/', routes);
 app.use('/users', users);
 // catch 404 and forward to error handler

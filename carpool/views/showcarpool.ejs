@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+    <head>
+        <% include head %>
+    </head>
+    <body>
+      <%include naviguide %>
+      <div class='container'>
+        <div class='panel panel-default' style="color:gray;">
+            <div class='panel-heading'>
+                <h3 class='panel-title'>参加的拼车</h3>
+            </div>
+            <div class='panel-body'>
+                <ul class='list-group'>
+                    <% for (var i=0;i<carpools.length;i++){%>
+                        <a href=<%- '"pooldetail?Carpool='+carpools[i].PoolID+'"' %> class='list-group-item'>
+                            <div class='row'>
+                                <div class='col-md-1 list-group-item-text'>从</div>
+                                <div class='col-md-3 list-group-item-text'>
+                                    <h3><%- carpools[i].Departure %></h3>
+                                </div>
+                                <div class='col-md-1 list-group-item-text'>至</div>
+                                <div class='col-md-3 list-group-item-text'>
+                                    <h3><%- carpools[i].Destination %></h3>
+                                </div>
+                                <div class='col-md-3' style="font-size:20px list-group-item-text"><%- carpools[i].D_date %></div>
+                                <div class='col-md-1' style="font-size:20px list-group-item-text"><%- carpools[i].Capacity %>人</div>
+                            </div>
+                        </a>
+
+                          <li class='list-group-item'><div class='row'><a href=<%- '"./quitCarpool?CarpoolID='+carpools[i].PoolID+'"'%> class='btn btn-danger col-md-offset-10 col-md-2'>退出拼车</a></div>
+                          </li>
+
+                    <%}%>
+                </ul>
+            </div>
+        </div>
+</div>
+        <%include footer.html %>
+    </body>
+    <%include foot.html %>
+</html>

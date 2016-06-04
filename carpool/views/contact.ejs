@@ -4,7 +4,7 @@
 
         <link href='css/contact.css' rel='stylesheet'>
         <% include head %>
-        <div visible='hidden' id='GroupID_'>4</div>
+        <meta visible='hidden' id='GroupID_' content=<%- '"'+GroupID+'"'%> />
     </head>
     <body>
         <%include naviguide %>
@@ -12,21 +12,14 @@
             <div class='row'>
 
                 <div class='col-md-2 col-sm-6'>
-                    <div data-spy="affix">
-                        <div class='panel panel-primary' style="width:100%;boader-color:gray" id="panel-left">
-                            <a href="#" class="list-group-item">
-                                <span class="glyphicon glyphicon-home"></span>
-                                &nbsp;菜单1</a>
-                            <a href="#" class="list-group-item">
-                                <span class="glyphicon glyphicon-edit"></span>
-                                &nbsp;菜单2</a>
-                            <a href="#" class="list-group-item">
-                                <span class="glyphicon glyphicon-list"></span>
-                                &nbsp;菜单3</a>
-                            <a href="#" class="list-group-item">
-                                <span class="glyphicon glyphicon-list-alt"></span>
-                                &nbsp;菜单4</a>
-                        </div>
+                    <div class='panel panel-primary' style="boader-color:gray;overflow:scroll;height=450px;" id="panel-left">
+                      <ul style='height:500px'>
+                        <%for (var i =0;i<contact.length;i=i+1){%>
+                            <a href=<%- '"'+"./Contact?GroupID="+contact[i].GroupID+'"' %> class=<%- '"'+"list-group-item "+((contact[i].GroupID==GroupID)?'active':'')+'"'%>>
+                                <span class=<%- '"'+"glyphicon glyphicon-home"+'"'%>></span>
+                                &nbsp;<%- contact[i].description %></a>
+                        <%}%>
+                      </ul>
                     </div>
                 </div>
                 <div class='col-md-10 col-sm-6'>
@@ -55,6 +48,9 @@
         Zhepin.init();
         Zhepin.sendUser()
     };
+    window.onbeforeunload = function(event) {
+        return Zhepin.disconnect();
+    }
     function sendmessage() {
         Zhepin.sendMessage()
     }

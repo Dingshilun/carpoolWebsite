@@ -10,6 +10,8 @@ var multiparty = require('multiparty');
 var util = require('util');
 var fs = require('fs');
 var defaultface='default.png'
+var contact_routers=require('./contact_routers')
+var show_carpool_router=require('./show_carpool_router')
 // router.use(cookieParser());
 // router.use(session(
 //   {
@@ -95,6 +97,7 @@ router.get('/joinCarpool',function(req,res,next){
   var PoolID=req.query.PoolID
   carpoolmanager.JoinCarpool(PoolID, req.session.user, function(feedback){
     if (feedback=='success'){
+      console.log('参加成功');
       res.render('joinsuccess',{
         UserID:req.session.user
       })
@@ -103,6 +106,7 @@ router.get('/joinCarpool',function(req,res,next){
 })
 router.post('/BeginCarpool',function(req,res,next){
 console.log('BeginCarpool');
+console.log(req.body);
 carpoolmanager.BeginCarpool(req.session.user, req.body.Departure, req.body.Destination, req.body.D_date, req.body.Capacity, req.body.contact, function(feedback){
   if (feedback=='success'){
     showPalace(req,res,next)
@@ -165,10 +169,11 @@ router.get('/exit',function(req,res,next){
   res.redirect('/login')
 })
 /******加入聊天*****/
-router.get('/contact',function(req,res,next){
-  res.render('contact',{
-    UserID:req.session.user
+router.use('/showcarpool',show_carpool_router)
+router.get('/quitCarpool',function(req,res,next){
+  var PoolID=req.query.CarpoolID
+  carpoolmanager.QuitCarpool(PoolID, req.session.user, function(feedback){
+    res.redirect('/showcarpool')
   })
 })
-
 module.exports = router;

@@ -19,3 +19,9 @@ exports.exit_contact=function(UserID,GroupID,callback){
     if (!qerr&&callback) callback('success')
   })
 }
+exports.show_all_contact=function(UserID,callback){
+  var sql='select * from join_contact natural join contact where UserID='+tool.bag(UserID)+';'
+  mysql.query(sql,function(qerr,vals,fields){
+    callback(qerr,vals,fields)
+  })
+}

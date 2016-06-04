@@ -2,54 +2,104 @@
 <html lang='zh-CN'>
     <head>
         <% include head %>
+        <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
     </head>
     <body>
         <%include naviguide.ejs %>
         <div class='container' style='margin-right:0px'>
-                <div class='row'>
-                    <form role='form'>
-                        <div class='col-md-4 col-sm-6'>
-                            <label>输入出发地点：</label>
-                            <input type="text" class='form-control'/>
+            <div class='row'>
+                <form role='form'>
+                    <div class='col-md-4 col-sm-6'>
+                        <label>输入出发地点：</label>
+                        <select class="form-control">
+                            <option>玉泉</option>
+                            <option>紫金港</option>
+                            <option>之江</option>
+                            <option>华家池</option>
+                            <option>西溪</option>
+                        </select>
+                    </div>
+                    <div class='col-md-4 col-sm-6'>
+                        <label>输入目的地：</label>
+                        <select class="form-control" name='Departure'>
+                            <option value='玉泉'>玉泉</option>
+                            <option value='紫金港'>紫金港</option>
+                            <option value='之江'>之江</option>
+                            <option value='华家池'>华家池</option>
+                            <option value='西溪'>西溪</option>
+                        </select>
+                    </div>
+                    <div class='col-md-4 col-sm-6'>
+
+                        <label for="dtp_input3">拼车日期</label>
+                        <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input3" data-link-format="yyyy-mm-dd" style="margin-bottom:0px">
+                            <input class="form-control" type="text" value=<%-(typeof date_checkout=='undefined')?"''":'"'+date_checkout+'"'%>>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
                         </div>
-                        <div class='col-md-4 col-sm-6'>
-                            <label>输入目的地：</label>
-                            <input type="text" class='form-control'/>
-                        </div>
-                        <div class='col-md-4 col-sm-6'>
-                            <label>输入筛选时间：</label>
-                            <input type="text" class='form-control'/>
-                        </div>
-                        <br>
-                        <div class='col-md-12 text-center'><button type='submit' class='btn btn-primary'>提交</div>
+                        <input type="hidden" id="dtp_input3" value=<%-(typeof date_checkout!='undefined')?((typeof true_checkout=='undefined')?'"'+date_checkout+'"':'"'+true_checkout+'"'):"''"%> name='D_date'/>
+
+                    </div>
+                    <br>
+                    <div class='col-md-12 text-center'>
+                        <button type='submit' class='btn btn-primary'>提交</div>
                     </form>
                 </div>
                 <br>
-              <div class='panel panel-default' style="color:gray;">
-                <div class='panel-heading'><h3 class='panel-title'>拼车广场</h3></div>
-                <div class='panel-body'>
-            <ul class='list-group'>
-                <% for (var i=0;i<carpools.length;i++){%>
-                    <a href=<%- '"pooldetail?Carpool='+carpools[i].PoolID+'"' %> class='list-group-item'>
-                        <div class='row'>
-                            <div class='col-md-1 list-group-item-text'>从</div>
-                            <div class='col-md-3 list-group-item-text'>
-                                <h3><%- carpools[i].Departure %></h3>
-                            </div>
-                            <div class='col-md-1 list-group-item-text'>至</div>
-                            <div class='col-md-3 list-group-item-text'>
-                                <h3><%- carpools[i].Destination %></h3>
-                            </div>
-                            <div class='col-md-2' style="font-size:20px list-group-item-text"><%- carpools[i].D_date %></div>
-                            <div class='col-md-2' style="font-size:20px list-group-item-text"><%- carpools[i].Capacity %>人</div>
-                        </div>
-                    </a>
-                <%}%>
-            </ul>
-          </div>
-          </div>
-        </div>
-        <%include footer.html %>
-    </body>
-    <%include foot.html %>
-</html>
+                <div class='panel panel-default' style="color:gray;">
+                    <div class='panel-heading'>
+                        <h3 class='panel-title'>拼车广场</h3>
+                    </div>
+                    <div class='panel-body'>
+                        <ul class='list-group'>
+                            <% for (var i=0;i<carpools.length;i++){%>
+                                <a href=<%- '"pooldetail?Carpool='+carpools[i].PoolID+'"' %> class='list-group-item'>
+                                    <div class='row'>
+                                        <div class='col-md-1 list-group-item-text'>从</div>
+                                        <div class='col-md-3 list-group-item-text'>
+                                            <h3><%- carpools[i].Departure %></h3>
+                                        </div>
+                                        <div class='col-md-1 list-group-item-text'>至</div>
+                                        <div class='col-md-3 list-group-item-text'>
+                                            <h3><%- carpools[i].Destination %></h3>
+                                        </div>
+                                        <div class='col-md-2' style="font-size:20px list-group-item-text"><%- carpools[i].D_date %></div>
+                                        <div class='col-md-2' style="font-size:20px list-group-item-text"><%- carpools[i].Capacity %>人</div>
+                                    </div>
+                                </a>
+                            <%}%>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <%include footer.html %>
+        </body>
+        <%include foot.html %>
+        <script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+        <script type="text/javascript">
+            $('.form_date').datetimepicker({
+                language: 'zh-CN',
+                weekStart: 1,
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                minView: 2,
+                forceParse: 0
+            });
+            (function($) {
+                $('.spinner .btn:first-of-type').on('click', function() {
+                    $('.spinner input').val(parseInt($('.spinner input').val(), 10) + 1);
+                });
+                $('.spinner .btn:last-of-type').on('click', function() {
+                    if ($('.spinner input').val()>0)$('.spinner input').val(parseInt($('.spinner input').val(), 10) - 1);
+                });
+            })(jQuery);
+        </script>
+
+    </html>

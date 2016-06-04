@@ -5,9 +5,18 @@
     </head>
     <body>
       <%include naviguide %>
-      加入成功！
+      加入成功！将您重定向至已参加的拼车页面。。。
+      您也可以直接点击上方导航栏按钮跳转。。。
 
         <%include footer.html %>
     </body>
     <%include foot.html %>
+    <script>
+function jumpurl(){
+  var ref=$('#join_carpool').attr('href')
+  location=ref;
+}
+setTimeout('jumpurl()',3000);
+</script>
+
 </html>

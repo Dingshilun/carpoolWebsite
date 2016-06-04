@@ -13,31 +13,62 @@
 
                     <div class='form-group'>
                         <label for='Departure'>出发地</label>
-                        <input type='text' name='Departure' class='form-control'/>
+                        <select class="form-control" name='Departure'>
+                            <option value='玉泉'>玉泉</option>
+                            <option value='紫金港'>紫金港</option>
+                            <option value='之江'>之江</option>
+                            <option value='华家池'>华家池</option>
+                            <option value='西溪'>西溪</option>
+                        </select>
                     </div>
                     <div class='form-group'>
                         <label for='Destination'>目的地</label>
-                        <input type='text' name='Destination' class='form-control'/>
+                        <select class="form-control" name='Destination'>
+                            <option value='玉泉'>玉泉</option>
+                            <option value='紫金港'>紫金港</option>
+                            <option value='之江'>之江</option>
+                            <option value='华家池'>华家池</option>
+                            <option value='西溪'>西溪</option>
+                        </select>
                     </div>
                     <div class='form-group'>
-                        <label for='date'>日期</label>
-                        <input type='text' name='D_date' class='form-control'/>
+                        <label for="dtp_input4">拼车日期</label>
+                        <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input4" data-link-format="yyyy-mm-dd" style="margin-bottom:0px">
+                            <input class="form-control" type="text" value=<%-(typeof date_checkout=='undefined')?"''":'"'+date_checkout+'"'%>>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        <input type="hidden" id="dtp_input4" value=<%-(typeof date_checkout!='undefined')?((typeof true_checkout=='undefined')?'"'+date_checkout+'"':'"'+true_checkout+'"'):"''"%> name='D_date'/>
                     </div>
                     <div class='form-group'>
                         <label for='Capacity'>最大人数</label>
-                        <input type='text' name='Capacity' class='form-control'/>
-                    </div>
-                    <div class='form-group'>
-                        <label for='contact'>联系方式</label>
-                        <input type='text' name='contact' class='form-control'/>
-                    </div>
+                        <div class="input-group spinner">
+                            <input type="text" class="form-control" value="2" name='Capacity'>
+                            <div class="input-group-btn-vertical">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-caret-up"></i>
+                                </button>
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                      </div>
+                        <div class='form-group'>
+                            <label for='contact'>联系方式</label>
+                            <input type='text' name='contact' class='form-control'/>
+                        </div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>
-                    <button type="submit" class="btn btn-primary">发起拼车</button>
-                </div>
-            </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary">发起拼车</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
