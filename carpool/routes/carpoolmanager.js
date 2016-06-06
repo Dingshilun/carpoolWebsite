@@ -97,12 +97,14 @@ exports.BeginCarpool=function(userID,Departure,Destination,D_date,Capacity,conta
       console.log(qerr);
       callback('fail')
     } else{
-      mysql.query('select @@IDENTITY',function(qerr,vals,fields){
-        console.log(vals[0]['@@IDENTITY']);
-        contactmanager.begin_contact(vals[0]['@@IDENTITY'],Departure+'→'+Destination,exports.JoinCarpool(vals[0]['@@IDENTITY'],userID,callback('success')))
 
-      })
+      //   console.log(vals[0]['@@IDENTITY']);
+      //   contactmanager.begin_contact(vals[0]['@@IDENTITY'],Departure+'→'+Destination,exports.JoinCarpool(vals[0]['@@IDENTITY'],userID,callback('success')))
+        var PoolID=vals.insertId
+        console.log(">>>>>>>>>>>>>>POOLID",PoolID);
+         contactmanager.begin_contact(PoolID,Departure+'→'+Destination,exports.JoinCarpool(PoolID,userID,callback('success')))
+      }
 
-    }
+
   })
 }
