@@ -6,6 +6,7 @@ var mysql=require('./mysqlconnect')
 var tool=require('./utility')
 var join_contact=new Array();
 var friendsmanager=require('./friendsmanager')
+var moment=require('moment')
 var user_in_contact_index=new Array()
 var count=new Array()
 exports.init=function(){
@@ -45,8 +46,8 @@ exports.oncallback=function(socket){
     message=JSON.parse(message)
     var GroupID=message[0].GroupID
     var content=message[0].Content
-    var User=message[0].UserID
-    var Send_date=new Date()
+    var User=message[0].Sender
+    var Send_date=moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
     message[0].Send_date=Send_date
     console.log(">>>>>>>>>>>>>>>join_contact>>>>>>>>",join_contact);
     var sql='insert into contact_content values('+tool.bag(GroupID)+','+tool.bag(User)+','+tool.bag(content)+','+tool.bag(Send_date)+');'
@@ -66,10 +67,14 @@ exports.oncallback=function(socket){
   })//发消息，发到聊天group，两个人可以建一个只有两个人的group
   /****客户端请求聊天记录*****/
   socket.on('get_content_from_server',function(message){
+    message=JSON.parse(message)
     var GroupID=message['GroupID']
     var User=message['User']
     var sql='select * from contact_content where GroupID='+tool.bag(GroupID)+' order by Send_date limit 20;'
     mysql.query(sql,function(qerr,vals,fields){
+      for (i in vals){
+        vals[i].Send_date=moment(vals[i].Send_date).format("YYYY-MM-DD HH:mm:ss")
+      }
       socket.emit('message_from_server',JSON.stringify(vals))
     })
   })

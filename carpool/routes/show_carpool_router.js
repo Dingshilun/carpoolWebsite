@@ -11,10 +11,15 @@ var util = require('util');
 var fs = require('fs');
 var defaultface='default.png'
 var contact_routers=require('./contact_routers')
+var moment=require('moment')
+moment.locale('zh-cn')
 router.get('/',function(req,res,next){
   var UserID=req.session.user
   carpoolmanager.ShowUserPool(UserID,function(feedback,vals){
     if (feedback=='success'){
+      for (i in vals){
+        vals[i].D_date=moment(vals[i].D_date).format('LLL')
+      }
       res.render('showcarpool',{
         UserID:req.session.user,
         carpools:vals})

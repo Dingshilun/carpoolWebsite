@@ -4,14 +4,14 @@
 
         <link href='css/contact.css' rel='stylesheet'>
         <% include head %>
-        <meta visible='hidden' id='GroupID_' content=<%- '"'+GroupID+'"'%> />
+        <meta visible='hidden' id='GroupID_' content=<%- GroupID%> />
     </head>
     <body>
         <%include naviguide %>
         <div class='container'>
             <div class='row'>
 
-                <div class='col-md-2 col-sm-6'>
+                <div class='col-md-2 col-sm-12'>
                     <div class='panel panel-primary' style="boader-color:gray;overflow:scroll;height=450px;" id="panel-left">
                       <ul style='height:500px'>
                         <%for (var i =0;i<contact.length;i=i+1){%>
@@ -22,7 +22,7 @@
                       </ul>
                     </div>
                 </div>
-                <div class='col-md-10 col-sm-6'>
+                <div class='col-md-10 col-sm-12'>
                     <div class='panel panel-primary' style='background-color:#f3f3f3' overflow='scroll' height='100px'>
                         <ul class="content-reply-box mg10" style='height:450px;overflow:scroll' id='content'></ul>
                         <ul class="panel panel-footer">
@@ -44,10 +44,12 @@
 <script src='js/contactor_client.js'></script>
 <%include foot.html %>
 <script type='text/javascript'>
-    window.onload = function() {
-        Zhepin.init();
-        Zhepin.sendUser()
-    };
+  window.onload=function(){
+    Zhepin.init();
+    Zhepin.sendUser()
+    while(flag!=1);
+    Zhepin.getContent()
+  }
     window.onbeforeunload = function(event) {
         return Zhepin.disconnect();
     }
@@ -60,6 +62,7 @@
                 sendmessage()
             }
         });
+
     })
 </script>
 </html>

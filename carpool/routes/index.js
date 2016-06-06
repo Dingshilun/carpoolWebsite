@@ -1,4 +1,4 @@
-var express = require('express');
+  var express = require('express');
 var router = express.Router();
 var cookieParser = require('cookie-parser');
 var session = require('express-session')
@@ -12,6 +12,8 @@ var fs = require('fs');
 var defaultface='default.png'
 var contact_routers=require('./contact_routers')
 var show_carpool_router=require('./show_carpool_router')
+var moment=require('moment')
+moment.locale("zh-cn");
 // router.use(cookieParser());
 // router.use(session(
 //   {
@@ -24,6 +26,9 @@ var showPalace=function(req,res,next){
   console.log('showPalace');
   carpoolmanager.FilterCarpool(null,null,null, null, null, function(callback,vals){
     if (callback=='fail') vals=null;
+    for (i in vals){
+      vals[i].D_date=moment(vals[i].D_date).format('LLL')
+    }
       res.render('palace',{
         carpools:vals,
         UserID:req.session.user
@@ -119,6 +124,9 @@ router.get('/pooldetail',function(req,res,next){
     console.log(vals1);
     carpoolmanager.UsersInCarpool(poolID,function(qerr,vals,fields){
       console.log(vals);
+      for (i in vals1){
+        vals1[i].D_date=moment(vals1[i].D_date).format('LLL')
+      }
       res.render('pooldetail',{
         UserID:req.session.user,
         users:vals,
