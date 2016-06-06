@@ -22,8 +22,8 @@ router.get('/',function(req,res,next){
       req.session.contact=vals
       console.log('>>>>>>>>>>>>>>show all',vals);
       res.render('contact',{
-        GroupID:vals[0].GroupID,
-        contact:vals,
+        GroupID:(vals.length==0)?0:vals[0].GroupID,
+        contact:(vals.length==0)?null:vals,
         UserID:req.session.user
       })
     })

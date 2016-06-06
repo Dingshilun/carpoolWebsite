@@ -14,10 +14,12 @@
                 <div class='col-md-2 col-sm-12'>
                     <div class='panel panel-primary' style="boader-color:gray;overflow:scroll;height=450px;" id="panel-left">
                       <ul style='height:500px'>
+                        <%if (contact!=null) {%>
                         <%for (var i =0;i<contact.length;i=i+1){%>
                             <a href=<%- '"'+"./Contact?GroupID="+contact[i].GroupID+'"' %> class=<%- '"'+"list-group-item "+((contact[i].GroupID==GroupID)?'active':'')+'"'%>>
                                 <span class=<%- '"'+"glyphicon glyphicon-home"+'"'%>></span>
                                 &nbsp;<%- contact[i].description %></a>
+                        <%}%>
                         <%}%>
                       </ul>
                     </div>
