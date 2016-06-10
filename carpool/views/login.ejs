@@ -86,8 +86,13 @@
                                                     <div class="form-group">
                                                         <label class="control-label" for="inputPassword" name='password'>密码</label>
                                                         <div class="controls">
-                                                            <input id="inputPassword" type="password" name='password'/>
+                                                            <input id="inputPassword1" type="password" name='password'/>
                                                         </div>
+                                                        <label class="control-label" for="inputPassword">确认密码</label>
+                                                        <div class="controls">
+                                                            <input id="inputPassword2" type="password"/>
+                                                        </div>
+                                                        <label class='help-label' id='help-label'></label>
                                                     </div>
                                                     <div class='form-group'>
                                                         <label class='form'>性别</label>
@@ -128,6 +133,15 @@
     <script src="assets/js/scripts.js"></script>
     <script src='js/messenger.min.js'></script>
     <script src='js/messenger-theme-future.js'></script>
+    <script>
+      $('#inputPassword2').keyup(function(){
+        if ($('#inputPassword2').val()!=$('#inputPassword1').val()){
+          $('#help-label').text('前后密码不一致，请确认')
+        }else {
+          $('#help-label').text('可以注册')
+        }
+      })
+    </script>
     <%include foot.html %>
     <%if (typeof feedback!='undefined'){%>
 

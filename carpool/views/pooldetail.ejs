@@ -29,21 +29,22 @@
             <ul>
           <%
           var flag=0
+          if (carpools[0].Capacity<=users.length) flag=1
           for (var i=0;i<users.length;i+=2){%>
             <div class='row'>
               <% if (i+1==users.length){
                 if (users[i].UserID==UserID){flag=1}
                 %>
-                <div class='rol-md-6 rol-sm-12'>
-                  <img src=<%- '"'+(typeof users[i].Pics=='undefined')?"default.png":users[i].Pics+'"' %> class='img img-thumbnail' style='height:25px'><%- users[i].UserID %>
+                <div class='col-md-6 col-sm-12'>
+                  <img src=<%- '"'+(typeof users[i].Pics=='undefined')?"default.png":users[i].Pics+'"' %> class='img img-thumbnail' style='height:35px'><%- users[i].UserID %>
                 </div>
                 <%}else{
                   if (users[i].UserID==UserID||users[i+1].UserID==UserID){flag=1}
                   %>
-                  <div class='rol-md-6 rol-sm-12'>
-                    <img src=<%- '"'+(typeof users[i].Pics=='undefined')?"default.png":users[i].Pics+'"' %> class='img img-thumbnail' style='height:25px'><%- users[i].UserID %>
-                  </div><div class='rol-md-6 rol-sm-12'>
-                    <img src=<%- '"'+(typeof users[i+1].Pics=='undefined')?"default.png":users[i+1].Pics+'"' %> class='img img-thumbnail' style='height:25px'><%- users[i+1].UserID %>
+                  <div class='col-md-6 col-sm-12'>
+                    <img src=<%- '"'+(typeof users[i].Pics=='undefined')?"default.png":users[i].Pics+'"' %> class='img img-thumbnail' style='height:35px'><%- users[i].UserID %>
+                  </div><div class='col-md-6 col-sm-12'>
+                    <img src=<%- '"'+(typeof users[i+1].Pics=='undefined')?"default.png":users[i+1].Pics+'"' %> class='img img-thumbnail' style='height:35px'><%- users[i+1].UserID %>
                   </div>
                   <%}%>
             </div>
@@ -53,6 +54,9 @@
         <%}%>
         <div class='row text-center'>
           <a type='button' class=<%-'"'+'btn btn-primary'+((flag==1)?' disabled':'')+'"'%> href=<%- "'"+'./joinCarpool?PoolID='+carpools[0].PoolID+"'"%> >确认参加</a>
+          <%if (flag){%>
+            <label for='button'>您已经在拼车中或者人数已满</label>
+            <%}%>
         </div>
       </div>
         <%include footer.html %>

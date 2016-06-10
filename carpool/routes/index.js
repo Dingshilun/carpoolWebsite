@@ -90,12 +90,26 @@ router.get('/test',function(req,res,next){
   })
 })
 router.get('/palace',showPalace)
-/***********/
-/*筛选拼车信息*/
 router.post('/palace',function(req,res,next){
-  console.log('post palace');
+  console.log('showPalace');
+  console.log(req.body);
+  var Departure=(req.body.Departure=="")?null:req.body.Departure
+  var Destination=(req.body.Destination=="")?null:req.body.Destination
+  var D_date=(req.body.D_date=="")?null:req.body.D_date
+  carpoolmanager.FilterCarpool(null,null,Departure, Destination, D_date, function(callback,vals){
+    if (callback=='fail') vals=null;
+    for (i in vals){
+      vals[i].D_date=moment(vals[i].D_date).format('LLL')
+    }
+      res.render('palace',{
+        carpools:vals,
+        UserID:req.session.user
+      })
+  })
 
 })
+/***********/
+/*筛选拼车信息*/
 /**********/
 /*加入拼车*/
 router.get('/joinCarpool',function(req,res,next){

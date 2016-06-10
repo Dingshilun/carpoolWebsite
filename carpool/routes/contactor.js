@@ -49,7 +49,7 @@ exports.oncallback=function(socket){
     var User=message[0].Sender
     var Send_date=moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
     message[0].Send_date=Send_date
-    console.log(">>>>>>>>>>>>>>>join_contact>>>>>>>>",join_contact);
+    //console.log(">>>>>>>>>>>>>>>join_contact>>>>>>>>",join_contact);
     var sql='insert into contact_content values('+tool.bag(GroupID)+','+tool.bag(User)+','+tool.bag(content)+','+tool.bag(Send_date)+');'
     mysql.query(sql,function(qerr,vals,fields){
       for (i in join_contact[GroupID]){
@@ -60,7 +60,7 @@ exports.oncallback=function(socket){
       //     console.log('send message to',user,message[0].content);
       //     socketMap[user].emit('message_from_server',JSON.stringify(message))}
       //
-      console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',join_contact[GroupID][i]);
+    //  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',join_contact[GroupID][i]);
       if (typeof join_contact[GroupID][i]!='undefined') join_contact[GroupID][i].emit('message_from_server',JSON.stringify(message))
     }//广播信息
     })

@@ -34,6 +34,8 @@ Zhepin.init = function() {
             if (parseInt(vals[i].GroupID)!=this.GroupID)
             {
               console.log(vals[i].GroupID,'  ',this.GroupID);
+              //收到其他组的消息
+              $('#GroupSpan'+vals[i].GroupID).append('<span class="glyphicon glyphicon-bell" style="color:red"></span>')
               continue}
             console.log("endfor");
             if (vals[i].Sender==this.UserID){

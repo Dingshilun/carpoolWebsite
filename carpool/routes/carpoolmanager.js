@@ -29,7 +29,7 @@ exports.FilterCarpool=function(carpoolID,userID,Departure,Destination,D_date,cal
   var count=0
   if (Departure!=null)
   {count++
-    sql=sql+" Departure="+tool.bag(Departure)
+    sql=sql+" Departure like "+tool.blur(Departure)
   }
   if (carpoolID!=null)
   {
@@ -46,12 +46,12 @@ exports.FilterCarpool=function(carpoolID,userID,Departure,Destination,D_date,cal
   if (Destination!=null)
   {count++
     if (count>1) sql=sql+' and'
-    sql=sql+" Destination="+tool.bag(Destination)
+    sql=sql+" Destination LIKE "+tool.blur(Destination)
   }
   if (D_date!=null)
   {count++
     if (count>1) sql=sql+' and'
-    sql=sql+" D_date="+tool.bag(D_date)
+    sql=sql+" D_date LIKE"+tool.blur(D_date)
   }
   if(count==0){
     sql='select * from carpool order by PoolID desc limit 10;'

@@ -18,21 +18,30 @@ router.get('/',function(req,res,next){
   var UserID=req.session.user
   if (typeof GroupID=='undefined'){
     //第一次访问contact
+
     contactmanager.show_all_contact(UserID, function(qerr,vals,fields){
       req.session.contact=vals
-      console.log('>>>>>>>>>>>>>>show all',vals);
+      GroupID=(req.session.contact.length==0)?0:req.session.contact[0].GroupID,
+      contactmanager.show_all_users_in_contact(GroupID, function(qerr,vals,fields){
+        res.render('contact',{
+          users:vals,
+          GroupID:(req.session.contact.length==0)?0:req.session.contact[0].GroupID,
+          contact:(req.session.contact.length==0)?null:req.session.contact,
+          UserID:req.session.user
+        })
+      })
+
+    })
+  }else {
+    contactmanager.show_all_users_in_contact(GroupID,function(qerr,vals,fields){
       res.render('contact',{
-        GroupID:(vals.length==0)?0:vals[0].GroupID,
-        contact:(vals.length==0)?null:vals,
+        users:vals,
+        GroupID:GroupID,
+        contact:req.session.contact,
         UserID:req.session.user
       })
     })
-  }else {
-    res.render('contact',{
-      GroupID:GroupID,
-      contact:req.session.contact,
-      UserID:req.session.user
-    })
+
   }
 })
 

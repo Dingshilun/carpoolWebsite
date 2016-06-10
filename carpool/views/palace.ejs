@@ -2,16 +2,17 @@
 <html lang='zh-CN'>
     <head>
         <% include head %>
-        <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
     </head>
     <body>
         <%include naviguide.ejs %>
-        <div class='container' style='margin-right:0px'>
+        <div class='container' style='margin-right:0px;margin-left:0px;'>
             <div class='row'>
-                <form role='form'>
+                <form role='form' method='post' action='palace'>
                     <div class='col-md-4 col-sm-6'>
                         <label>输入出发地点：</label>
-                        <select class="form-control">
+                        <select class="form-control" name='Departure'>
+                          <option value=''>－出发地－</option>
                             <option>玉泉</option>
                             <option>紫金港</option>
                             <option>之江</option>
@@ -21,7 +22,8 @@
                     </div>
                     <div class='col-md-4 col-sm-6'>
                         <label>输入目的地：</label>
-                        <select class="form-control" name='Departure'>
+                        <select class="form-control" name='Destination'>
+                            <option value=''>－目的地－</option>
                             <option value='玉泉'>玉泉</option>
                             <option value='紫金港'>紫金港</option>
                             <option value='之江'>之江</option>
@@ -79,27 +81,6 @@
             <%include footer.html %>
         </body>
         <%include foot.html %>
-        <script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
-        <script type="text/javascript">
-            $('.form_date').datetimepicker({
-                language: 'zh-CN',
-                weekStart: 1,
-                todayBtn: 1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
-                minView: 2,
-                forceParse: 0
-            });
-            (function($) {
-                $('.spinner .btn:first-of-type').on('click', function() {
-                    $('.spinner input').val(parseInt($('.spinner input').val(), 10) + 1);
-                });
-                $('.spinner .btn:last-of-type').on('click', function() {
-                    if ($('.spinner input').val()>0)$('.spinner input').val(parseInt($('.spinner input').val(), 10) - 1);
-                });
-            })(jQuery);
-        </script>
+
 
     </html>

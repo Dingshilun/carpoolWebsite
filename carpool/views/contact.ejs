@@ -4,7 +4,7 @@
 
         <link href='css/contact.css' rel='stylesheet'>
         <% include head %>
-        <meta visible='hidden' id='GroupID_' content=<%- GroupID%> />
+        <meta visible='hidden' id='GroupID_' content=<%- GroupID%>/>
     </head>
     <body>
         <%include naviguide %>
@@ -13,25 +13,43 @@
 
                 <div class='col-md-2 col-sm-12'>
                     <div class='panel panel-primary' style="boader-color:gray;overflow:scroll;height=450px;" id="panel-left">
-                      <ul style='height:500px'>
-                        <%if (contact!=null) {%>
-                        <%for (var i =0;i<contact.length;i=i+1){%>
-                            <a href=<%- '"'+"./Contact?GroupID="+contact[i].GroupID+'"' %> class=<%- '"'+"list-group-item "+((contact[i].GroupID==GroupID)?'active':'')+'"'%>>
-                                <span class=<%- '"'+"glyphicon glyphicon-home"+'"'%>></span>
-                                &nbsp;<%- contact[i].description %></a>
-                        <%}%>
-                        <%}%>
-                      </ul>
+                        <ul style='height:500px'>
+                            <%if (contact!=null) {%>
+                                <%for (var i =0;i<contact.length;i=i+1){%>
+                                    <a href=<%- '"'+"./Contact?GroupID="+contact[i].GroupID+'"' %> class=<%- '"'+"list-group-item "+((contact[i].GroupID==GroupID)?'active':'')+'"'%> id=<%- "GroupSpan"+contact[i].GroupID %>>
+                                        <span class=<%- '"'+"glyphicon glyphicon-home"+'"'%> ></span>
+                                        &nbsp;<%- contact[i].description %></a>
+                                <%}%>
+                            <%}%>
+                        </ul>
                     </div>
                 </div>
-                <div class='col-md-10 col-sm-12'>
+                <div class='col-md-2 col-sm-12'>
+                    <div class='panel panel-primary' style='background-color:#f3f3f3' overflow='scroll' height='100px'>
+                      <div class='panel-heading'>参与人员</div>
+                        <ul class='list-group' style='height:470px'>
+                            <% if (typeof users!='undefined'){ %>
+                                <% for (var i=0;i<users.length;i++){%>
+                                    <li class='list-group-item'>
+                                        <img src=<%- "'"+(users[i].Pic==null)?'default.png':users[i].Pic+"'" %> class='img-circle' style='height:30px;border-width:0px;margin-left:3px;margin-bottom:3px;margin-top:3px'>
+                                        <span><%- users[i].UserID %></span>
+                                        <%if (users[i].Gender=='m'){%><span class='glyphicon glyphicon-king'></span><%} else{%>
+                                            <span class='glyphicon glyphicon-queen'></span>
+                                          <%}%>
+                                    </li>
+                                <%}%>
+                            <%}%>
+                        </ul>
+                    </div>
+                </div>
+                <div class='col-md-8 col-sm-12'>
                     <div class='panel panel-primary' style='background-color:#f3f3f3' overflow='scroll' height='100px'>
                         <ul class="content-reply-box mg10" style='height:450px;overflow:scroll' id='content'></ul>
                         <ul class="panel panel-footer">
                             <div class='row'>
                                 <div class='col-md-10 col-sm-10'><input type='text' class='form-control' id='input_message'/></div>
                                 <div class='col-md-2 col-sm-2'>
-                                    <button onclick="sendmessage()" class='btn btn-primary btn-block'>发送</button>
+                                    <button onclick="sendmessage()" class='btn btn-primary btn-block'>发送<span class='glyphicon glyphicon-send'></span></button>
                                 </div>
                             </div>
                         </ul>
@@ -46,12 +64,13 @@
 <script src='js/contactor_client.js'></script>
 <%include foot.html %>
 <script type='text/javascript'>
-  window.onload=function(){
-    Zhepin.init();
-    Zhepin.sendUser()
-    while(flag!=1);
-    Zhepin.getContent()
-  }
+    window.onload = function() {
+        Zhepin.init();
+        Zhepin.sendUser()
+        while (flag != 1)
+        ;
+        Zhepin.getContent()
+    }
     window.onbeforeunload = function(event) {
         return Zhepin.disconnect();
     }
