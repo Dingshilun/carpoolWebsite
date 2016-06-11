@@ -67,6 +67,9 @@ router.post('/login',function(req,res,next){
 router.post('/registe',function(req,res,next){
   console.log('post registe');
   console.log(req.body);
+  if (req.body.userid.length<6 || req.body.password.length<6){
+    res.render('login',{content:'用户名不能少于6位，密码不能少于6位',feedback:'用户名或密码格式不正确，注册失败'})
+  }else{
   logmanager.registe(req.body.userid,req.body.password,req.body.gender,req.body.detail,function(feedback){
     if (feedback=='UserExists'){
       console.log('用户名重复');
@@ -76,6 +79,7 @@ router.post('/registe',function(req,res,next){
       res.render('login',{content:'低碳，环保',feedback:'您可以使用'+req.body.userid+'登陆了'})
     }
   })
+}
 })
 router.get('/BeginCarpool',function(req,res,next){
 
