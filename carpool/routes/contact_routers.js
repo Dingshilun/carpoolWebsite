@@ -27,7 +27,8 @@ router.get('/',function(req,res,next){
           users:vals,
           GroupID:(req.session.contact.length==0)?0:req.session.contact[0].GroupID,
           contact:(req.session.contact.length==0)?null:req.session.contact,
-          UserID:req.session.user
+          UserID:req.session.user,
+          UserPic:req.session.avatar
         })
       })
 
@@ -38,7 +39,8 @@ router.get('/',function(req,res,next){
         users:vals,
         GroupID:GroupID,
         contact:req.session.contact,
-        UserID:req.session.user
+        UserID:req.session.user,
+        UserPic:req.session.avatar
       })
     })
 

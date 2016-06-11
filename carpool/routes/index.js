@@ -29,9 +29,11 @@ var showPalace=function(req,res,next){
     for (i in vals){
       vals[i].D_date=moment(vals[i].D_date).format('LLL')
     }
+    //console.log(req.session);
       res.render('palace',{
         carpools:vals,
-        UserID:req.session.user
+        UserID:req.session.user,
+        UserPic:req.session.avatar
       })
   })
 
@@ -47,8 +49,12 @@ router.post('/login',function(req,res,next){
     if (feedback=='Success'){
       console.log('登陆成功');
       req.session.user=req.body.userid
-      console.log(req.session);
-      res.redirect('/palace')
+      logmanager.getPic(req.session.user,function(pic){
+        req.session.avatar=pic
+        console.log(req.session);
+        res.redirect('/palace')
+      })
+
     }else {
       console.log('登录失败');
       res.render('login',{
@@ -103,7 +109,8 @@ router.post('/palace',function(req,res,next){
     }
       res.render('palace',{
         carpools:vals,
-        UserID:req.session.user
+        UserID:req.session.user,
+        UserPic:req.session.avatar
       })
   })
 
@@ -118,7 +125,8 @@ router.get('/joinCarpool',function(req,res,next){
     if (feedback=='success'){
       console.log('参加成功');
       res.render('joinsuccess',{
-        UserID:req.session.user
+        UserID:req.session.user,
+        UserPic:req.session.avatar
       })
     }
   })
@@ -144,7 +152,8 @@ router.get('/pooldetail',function(req,res,next){
       res.render('pooldetail',{
         UserID:req.session.user,
         users:vals,
-        carpools:vals1
+        carpools:vals1,
+        UserPic:req.session.avatar
       })
     })
   })
@@ -153,7 +162,8 @@ router.get('/editprofile',function(req,res,next){
   logmanager.showprofile(req.session.user, function(qerr,vals,fields){
     res.render('editprofile',{
       UserID:req.session.user,
-      user:vals
+      user:vals,
+      UserPic:req.session.avatar
     })
   })
 })

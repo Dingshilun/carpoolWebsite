@@ -22,7 +22,8 @@ router.get('/',function(req,res,next){
       }
       res.render('showcarpool',{
         UserID:req.session.user,
-        carpools:vals})
+        carpools:vals,
+      UserPic:req.session.avatar})
     }
   })
 })

@@ -2,7 +2,7 @@ var mysql=require('./mysqlconnect')
 var tool=require('./utility')
 var contactmanager=require('./contactmanager')
 exports.ShowUserPool=function(UserID,callback){
-  var sql='select * from joinpool natural join carpool where UserID='+tool.bag(UserID)+';'
+  var sql='select * from joinpool natural join carpool natural join userPic where UserID='+tool.bag(UserID)+';'
   mysql.query(sql,function(qerr,vals,fields){
     callback('success',vals)
   })

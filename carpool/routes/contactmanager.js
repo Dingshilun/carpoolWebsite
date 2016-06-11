@@ -8,7 +8,7 @@ exports.join_contact=function(UserID,GroupID,callback)
   })
 }
 exports.show_all_users_in_contact=function(GroupID,callback){
-  var sql='select join_contact.UserID,Pics from join_contact natural join users left outer join userPic on join_contact.UserID=userPic.UserID where GroupID='+GroupID+';'
+  var sql='select join_contact.UserID,users.Gender,Pics from join_contact natural join users left outer join userPic on join_contact.UserID=userPic.UserID where GroupID='+GroupID+';'
   mysql.query(sql,function(qerr,vals,fields){
     callback(qerr,vals,fields)
   })

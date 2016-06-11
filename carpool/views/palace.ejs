@@ -9,7 +9,7 @@
         <div class='container' style='margin-right:0px;margin-left:0px;'>
             <div class='row'>
                 <form role='form' method='post' action='palace'>
-                    <div class='col-md-4 col-sm-6'>
+                    <div class='col-md-3 col-sm-6'>
                         <label>输入出发地点：</label>
                         <select class="form-control" name='Departure'>
                           <option value=''>－出发地－</option>
@@ -20,7 +20,7 @@
                             <option>西溪</option>
                         </select>
                     </div>
-                    <div class='col-md-4 col-sm-6'>
+                    <div class='col-md-3 col-sm-6'>
                         <label>输入目的地：</label>
                         <select class="form-control" name='Destination'>
                             <option value=''>－目的地－</option>
@@ -34,7 +34,7 @@
                     <div class='col-md-4 col-sm-6'>
 
                         <label for="dtp_input3">拼车日期</label>
-                        <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input3" data-link-format="yyyy-mm-dd" style="margin-bottom:0px">
+                        <div id='form_date2' class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input3" data-link-format="yyyy-mm-dd" style="margin-bottom:0px">
                             <input class="form-control" type="text" value=<%-(typeof date_checkout=='undefined')?"''":'"'+date_checkout+'"'%>>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-remove"></span>
@@ -46,9 +46,9 @@
                         <input type="hidden" id="dtp_input3" value=<%-(typeof date_checkout!='undefined')?((typeof true_checkout=='undefined')?'"'+date_checkout+'"':'"'+true_checkout+'"'):"''"%> name='D_date'/>
 
                     </div>
-                    <br>
-                    <div class='col-md-12 text-center'>
-                        <button type='submit' class='btn btn-primary'>提交</div>
+
+                    <div class='col-md-2 text-center'>
+                        <button type='submit' class='btn btn-primary' style='margin-top:25px'>提交</button></div>
                     </form>
                 </div>
                 <br>
@@ -58,6 +58,11 @@
                     </div>
                     <div class='panel-body'>
                         <ul class='list-group'>
+                            <% if (carpools.length==0){ %>
+                              <div class="jumbotron">
+                                <h2>似乎没有小伙伴想要这样拼车。。。</h2>
+                              </div>
+                              <%}%>
                             <% for (var i=0;i<carpools.length;i++){%>
                                 <a href=<%- '"pooldetail?Carpool='+carpools[i].PoolID+'"' %> class='list-group-item'>
                                     <div class='row'>
@@ -69,8 +74,8 @@
                                         <div class='col-md-3 list-group-item-text'>
                                             <h3><%- carpools[i].Destination %></h3>
                                         </div>
-                                        <div class='col-md-2' style="font-size:20px list-group-item-text"><%- carpools[i].D_date %></div>
-                                        <div class='col-md-2' style="font-size:20px list-group-item-text"><%- carpools[i].Capacity %>人</div>
+                                        <div class='col-md-3' style="font-size:20px list-group-item-text"><%- carpools[i].D_date %></div>
+                                        <div class='col-md-1' style="font-size:20px list-group-item-text"><%- carpools[i].Capacity %>人</div>
                                     </div>
                                 </a>
                             <%}%>

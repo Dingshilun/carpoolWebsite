@@ -17,8 +17,8 @@
             <div class='col-md-3 list-group-item-text'>
                 <h3><%- carpools[0].Destination %></h3>
             </div>
-            <div class='col-md-2' style="font-size:20px list-group-item-text"><%- carpools[0].D_date %></div>
-            <div class='col-md-2' style="font-size:20px list-group-item-text"><%- carpools[0].Capacity %>人</div>
+            <div class='col-md-3' style="font-size:20px list-group-item-text"><%- carpools[0].D_date %></div>
+            <div class='col-md-1' style="font-size:20px list-group-item-text"><%- carpools[0].Capacity %>人</div>
         </div>
       </div>
     </div>
@@ -36,15 +36,15 @@
                 if (users[i].UserID==UserID){flag=1}
                 %>
                 <div class='col-md-6 col-sm-12'>
-                  <img src=<%- '"'+(typeof users[i].Pics=='undefined')?"default.png":users[i].Pics+'"' %> class='img img-thumbnail' style='height:35px'><%- users[i].UserID %>
+                  <img src=<%- '"'+((typeof users[i].Pics=='undefined')?"default.png":users[i].Pics)+'"' %> class='img img-thumbnail' style='height:35px'><%- users[i].UserID %>
                 </div>
                 <%}else{
                   if (users[i].UserID==UserID||users[i+1].UserID==UserID){flag=1}
                   %>
                   <div class='col-md-6 col-sm-12'>
-                    <img src=<%- '"'+(typeof users[i].Pics=='undefined')?"default.png":users[i].Pics+'"' %> class='img img-thumbnail' style='height:35px'><%- users[i].UserID %>
+                    <img src=<%- '"'+((typeof users[i].Pics=='undefined')?"default.png":users[i].Pics)+'"' %> class='img img-thumbnail' style='height:35px'><%- users[i].UserID %>
                   </div><div class='col-md-6 col-sm-12'>
-                    <img src=<%- '"'+(typeof users[i+1].Pics=='undefined')?"default.png":users[i+1].Pics+'"' %> class='img img-thumbnail' style='height:35px'><%- users[i+1].UserID %>
+                    <img src=<%- '"'+((typeof users[i+1].Pics=='undefined')?"default.png":users[i+1].Pics)+'"' %> class='img img-thumbnail' style='height:35px'><%- users[i+1].UserID %>
                   </div>
                   <%}%>
             </div>

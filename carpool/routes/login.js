@@ -12,6 +12,13 @@ exports.insertPic=function(userid,picpath,callback)
     mysql.query(sql,callback)
   })
 }
+exports.getPic=function(UserID,callback){
+  var sql='select Pics from userPic where UserID='+tool.bag(UserID)+';'
+  mysql.query(sql,function(qerr,vals,fields){
+    if(vals.length>0)callback(vals[0].Pics)
+    else callback('default.png')
+  })
+}
 exports.checkifin=function(userid,password,callback){
   mysql.query("select Password from users where UserID='"+userid+"';",function(qerr,vals,fields){
 

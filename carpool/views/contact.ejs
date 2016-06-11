@@ -1,55 +1,85 @@
 <!DOCTYPE html>
 <html lang='zh-CN'>
     <head>
-
         <link href='css/contact.css' rel='stylesheet'>
         <% include head %>
-        <meta visible='hidden' id='GroupID_' content=<%- GroupID%>/>
+        <meta visible='hidden' id='GroupID_' content=<%- GroupID%>></meta>
+        <style type='text/css'>
+            #load-more {
+                text-decoration: none;
+            }
+            #load-more:hover {
+                -webkit-transition: all 1.0s ease;
+                -moz-transition: all 1.0s ease;
+                -ms-transition: all 1.0s ease;
+                -o-transition: all 1.0s ease;
+                FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=##fff,endColorStr=#eee);
+                /*IE*/
+                background: -moz-linear-gradient(top,#fff,#eee);
+                /*火狐*/
+                background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#fff), to(#eee));
+                /*谷歌*/
+                background-image: -webkit-gradient(linear,left bottom,left top,color-start(0, #fff),color-stop(1, #eee));
+                /* Safari & Chrome*/
+                filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr= '#fff', endColorstr='#eee');
+                /*IE6 & IE7*/
+                -ms-filter:  "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#fff', endColorstr='#eee')";
+                /* IE8 */
+                text-decoration: none;
+            }
+
+        </style>
     </head>
     <body>
         <%include naviguide %>
         <div class='container'>
             <div class='row'>
 
-                <div class='col-md-2 col-sm-12'>
-                    <div class='panel panel-primary' style="boader-color:gray;overflow:scroll;height=450px;" id="panel-left">
-                        <ul style='height:500px'>
+                <div class='col-md-2 col-sm-12' style='padding:0'>
+                    <div class='panel panel-primary' style="border-color:#669999;overflow:scroll;height=450px;" id="panel-left">
+                        <ul style='height:569px'>
                             <%if (contact!=null) {%>
                                 <%for (var i =0;i<contact.length;i=i+1){%>
                                     <a href=<%- '"'+"./Contact?GroupID="+contact[i].GroupID+'"' %> class=<%- '"'+"list-group-item "+((contact[i].GroupID==GroupID)?'active':'')+'"'%> id=<%- "GroupSpan"+contact[i].GroupID %>>
-                                        <span class=<%- '"'+"glyphicon glyphicon-home"+'"'%> ></span>
+                                        <span class=<%- '"'+"glyphicon glyphicon-home"+'"'%>></span>
                                         &nbsp;<%- contact[i].description %></a>
                                 <%}%>
                             <%}%>
                         </ul>
+
                     </div>
                 </div>
-                <div class='col-md-2 col-sm-12'>
-                    <div class='panel panel-primary' style='background-color:#f3f3f3' overflow='scroll' height='100px'>
-                      <div class='panel-heading'>参与人员</div>
-                        <ul class='list-group' style='height:470px'>
+                <div class='col-md-3 col-sm-12' style='padding:0'>
+                    <div class='panel panel-primary' style='border-color:#6699CC;' overflow='scroll' height='100px'>
+
+                        <ul class='list-group' style='height:539px'>
                             <% if (typeof users!='undefined'){ %>
                                 <% for (var i=0;i<users.length;i++){%>
                                     <li class='list-group-item'>
-                                        <img src=<%- "'"+(users[i].Pic==null)?'default.png':users[i].Pic+"'" %> class='img-circle' style='height:30px;border-width:0px;margin-left:3px;margin-bottom:3px;margin-top:3px'>
+                                        <img id=<%- "'"+'image'+users[i].UserID+"'"%> src=<%- "'"+((typeof users[i].Pics=='undefined')?'default.png':users[i].Pics)+"'" %> class='img-circle' style='height:30px;border-width:0px;margin-left:3px;margin-bottom:3px;margin-top:3px'>
                                         <span><%- users[i].UserID %></span>
-                                        <%if (users[i].Gender=='m'){%><span class='glyphicon glyphicon-king'></span><%} else{%>
-                                            <span class='glyphicon glyphicon-queen'></span>
-                                          <%}%>
+                                        <%if (users[i].Gender=='m'){%>
+                                            <span class='badge' style="text-align:right"><span class=' glyphicon glyphicon-king'></span></span>
+                                        <%} else{%>
+                                            <span class='badge' style="text-align:right"><span class=' glyphicon glyphicon-queen'></span></span>
+                                        <%}%>
                                     </li>
                                 <%}%>
                             <%}%>
                         </ul>
+                        <div class='panel-footer' style='background-color:#CCCCCC'>参与人员</div>
                     </div>
                 </div>
-                <div class='col-md-8 col-sm-12'>
-                    <div class='panel panel-primary' style='background-color:#f3f3f3' overflow='scroll' height='100px'>
+                <div class='col-md-7 col-sm-12' style='padding:0'>
+                    <div class='panel panel-primary' style='background-color:#f3f3f3;border-color:#6699FF' overflow='scroll' height='100px'>
+                        <a type='button' class='btn btn-default btn-block text-center' style='border:0px;background-color:#f3f3f3' onclick="GetMoreContent()" id='load-more'>Get More...</a>
                         <ul class="content-reply-box mg10" style='height:450px;overflow:scroll' id='content'></ul>
                         <ul class="panel panel-footer">
                             <div class='row'>
                                 <div class='col-md-10 col-sm-10'><input type='text' class='form-control' id='input_message'/></div>
                                 <div class='col-md-2 col-sm-2'>
-                                    <button onclick="sendmessage()" class='btn btn-primary btn-block'>发送<span class='glyphicon glyphicon-send'></span></button>
+                                    <button onclick="sendmessage()" class='btn btn-primary btn-block'>发送<span class='glyphicon glyphicon-send'></span>
+                                    </button>
                                 </div>
                             </div>
                         </ul>
@@ -77,13 +107,16 @@
     function sendmessage() {
         Zhepin.sendMessage()
     }
+    function GetMoreContent() {}
     $(document).ready(function() {
         $("#input_message").keyup(function() {
             if (event.keyCode == 13) {
                 sendmessage()
             }
         });
-
+        var GroupID=$('#GroupID_').attr('content')
+        $('#GroupSpan'+GroupID).css('background-color','#6699CC')
+        $('#GroupSpan'+GroupID).css('border','0px')
     })
 </script>
 </html>

@@ -42,7 +42,7 @@ Zhepin.init = function() {
               //发信人是自己
               console.log('appending');
               $('#content').append("<li class='even'>"+
-              '<a class="user" href="#"><img style="height:40px" class="img-responsive avatar_" src="'+(typeof vals[i].Avatar!='undefined'?vals[i].Avatar:'default.png')+'" alt=""><span class="user-name">'+vals[i].Sender+'</span></a><div class="reply-content-box">'+
+              '<a class="user" href="#"><img style="height:40px" class="img-responsive avatar_" src="'+$("#image"+vals[i].Sender).attr('src')+'" alt=""><span class="user-name">'+vals[i].Sender+'</span></a><div class="reply-content-box">'+
               '<span class="reply-time">'+vals[i].Send_date+'</span>'+
               '<div class="reply-content pr><span class="arrow">&nbsp;</span>'+vals[i].Content+'</div>'+
               '</div>'+
@@ -50,7 +50,7 @@ Zhepin.init = function() {
             }else{
               //发信人是他人
               $('#content').append("<li class='odd'>"+
-              '<a class="user" href="#"><img style="height:40px" class="img-responsive avatar_" src="'+(typeof vals[i].Avatar!='undefined'?vals[i].Avatar:'default.png')+'" alt=""><span class="user-name">'+vals[i].Sender+'</span></a><div class="reply-content-box">'+
+              '<a class="user" href="#"><img style="height:40px" class="img-responsive avatar_" src="'+$("#image"+vals[i].Sender).attr('src')+'" alt=""><span class="user-name">'+vals[i].Sender+'</span></a><div class="reply-content-box">'+
               '<span class="reply-time">'+vals[i].Send_date+'</span>'+
               '<div class="reply-content pr><span class="arrow">&nbsp;</span>'+vals[i].Content+'</div>'+
               '</div>'+
